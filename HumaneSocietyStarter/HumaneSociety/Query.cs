@@ -8,6 +8,7 @@ namespace HumaneSociety
 {
     public static class Query
     {        
+        //Figure out HumaneSocietyDataContext, how to link it up to our data base?
         static HumaneSocietyDataContext db;
 
         static Query()
@@ -166,81 +167,97 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
+            //CRUD = Select, because user can get info 
             throw new NotImplementedException();
         }
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
+            //CRUD = Insert, becasue Adding an animal to database
             throw new NotImplementedException();
         }
 
         internal static Animal GetAnimalByID(int id)
         {
+            //Crud = Select, because we are trying to FIND by using ID attributes
             throw new NotImplementedException();
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
+        {   
+            //CRUD = Update, because it says UPDATE
             throw new NotImplementedException();
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
+            //CRUD = Delete, because Remove means to delete
             throw new NotImplementedException();
         }
         
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
+            //CRUD = Select because FIND by MULTIPLE ATTRIBUTES
             throw new NotImplementedException();
         }
          
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
+            //CRUD = SELECT Finding by Category ID
             throw new NotImplementedException();
         }
         
         internal static Room GetRoom(int animalId)
         {
+            //CRUD = Insert? Cause Creatinging a Room
             throw new NotImplementedException();
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
+            //CRUD = SELECT because FINDING by ID
             throw new NotImplementedException();
         }
 
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
+            //CRUD = UPDATE or INSERT because depending if we update dog status or adding info somewhere else?
             throw new NotImplementedException();
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
+            //TO DO figure out IQueryable use/create interface?
+            
             throw new NotImplementedException();
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
+            //CRUD = UPDATE cause it says update
             throw new NotImplementedException();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
+            //CRUD = DELETE cause it says to remove from database?
             throw new NotImplementedException();
         }
 
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
+            //CRUD = Select? find out status if shots needed
             throw new NotImplementedException();
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
+            //CRUD = UPDATE cause it says update
             throw new NotImplementedException();
         }
     }
