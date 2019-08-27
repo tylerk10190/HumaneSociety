@@ -168,6 +168,7 @@ namespace HumaneSociety
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
             //CRUD = Select, because user can get info 
+            // SELECT , employee name, id, etc......
             throw new NotImplementedException();
         }
 
@@ -175,24 +176,29 @@ namespace HumaneSociety
         internal static void AddAnimal(Animal animal)
         {
             //CRUD = Insert, becasue Adding an animal to database
+            // INSERT INTO  Animal database (idk what the actual subject name to insert to)
+            //SELECT animal, or name FROM DATACLASS 
             throw new NotImplementedException();
         }
 
         internal static Animal GetAnimalByID(int id)
         {
             //Crud = Select, because we are trying to FIND by using ID attributes
+            //SELECT ID FROM ANIMAL DATABASE WHERE animal namde = ID
             throw new NotImplementedException();
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {   
             //CRUD = Update, because it says UPDATE
+            //UPDATE Animal_DB SET animal_name = adopted/free WHERE "something etc. etc"
             throw new NotImplementedException();
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
             //CRUD = Delete, because Remove means to delete
+            //DELETE FROM Animal_DB WHERE animal name = "Propmt'
             throw new NotImplementedException();
         }
         
@@ -200,6 +206,8 @@ namespace HumaneSociety
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
             //CRUD = Select because FIND by MULTIPLE ATTRIBUTES
+            //SELECT name,color, diet,size etc etc
+            //FROM Animal_DB
             throw new NotImplementedException();
         }
          
@@ -207,18 +215,26 @@ namespace HumaneSociety
         internal static int GetCategoryId(string categoryName)
         {
             //CRUD = SELECT Finding by Category ID
+            //SELECT ID FROM category
             throw new NotImplementedException();
         }
         
         internal static Room GetRoom(int animalId)
         {
             //CRUD = Insert? Cause Creatinging a Room
+            //INSERT INTO  Animal_DB (idk what the major database is called)
+            //SELECT Rooms
+            //FROM Animal_DB* 
+            //WHERE Room ID = Available Room ID
             throw new NotImplementedException();
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
             //CRUD = SELECT because FINDING by ID
+            //SELECT diet plan
+            //FROM ANimal_DB
+            //WHERE Diet Plan Id == 
             throw new NotImplementedException();
         }
 
@@ -226,6 +242,9 @@ namespace HumaneSociety
         internal static void Adopt(Animal animal, Client client)
         {
             //CRUD = UPDATE or INSERT because depending if we update dog status or adding info somewhere else?
+            //UPDATE Animal_Status
+            //SET Availablity = Adopted 
+            //WHERE pet_name = "Search_animal_prmpt"
             throw new NotImplementedException();
         }
 
@@ -239,12 +258,17 @@ namespace HumaneSociety
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
             //CRUD = UPDATE cause it says update
+            //UPDATE ANIMAL
+            //SET Availablity = null
+            //WHERE Animal_NAme = "PROMPT"
             throw new NotImplementedException();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
             //CRUD = DELETE cause it says to remove from database?
+            //DELETE FROM Animal_DB
+            //WHERE Animal_Name = "PROMPT'
             throw new NotImplementedException();
         }
 
@@ -252,12 +276,18 @@ namespace HumaneSociety
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
             //CRUD = Select? find out status if shots needed
+            //Select animal name, shot status
+            //FROM animal_db
+            //WHERE animal name = 'propmt'
             throw new NotImplementedException();
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
             //CRUD = UPDATE cause it says update
+            //UPDATE = Animal_Name
+            //SET Shot Status =Null or Recieved
+            //WHERE Animal_name = "PRopmt"
             throw new NotImplementedException();
         }
     }
