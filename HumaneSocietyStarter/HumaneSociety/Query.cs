@@ -228,12 +228,12 @@ namespace HumaneSociety
         
         internal static Room GetRoom(int animalId)
         {
-            //CRUD = Insert? Cause Creatinging a Room
-            //INSERT INTO  Animal_DB (idk what the major database is called)
-            //SELECT Rooms
-            //FROM Animal_DB* 
-            //WHERE Room ID = Available Room ID
-            throw new NotImplementedException();
+            Room room = new Room();
+            room = db.Rooms.Where(r => r.AnimalId == animalId).FirstOrDefault();
+            Console.WriteLine(room.RoomNumber);
+            Console.ReadLine();
+            return room;
+            
         }
         
         internal static int GetDietPlanId(string dietPlanName)
