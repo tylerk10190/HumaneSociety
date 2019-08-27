@@ -163,6 +163,7 @@ namespace HumaneSociety
                 return false;
             }
         }
+
         public static Dictionary<int, string> GetAnimalSearchCriteria()
         {
             Dictionary<int, string> searchParameters = new Dictionary<int, string>();
@@ -185,6 +186,7 @@ namespace HumaneSociety
             }
             return searchParameters;
         }
+
         public static Dictionary<int, string> EnterSearchCriteria(Dictionary<int, string> searchParameters, string input)
         {
             Console.Clear();

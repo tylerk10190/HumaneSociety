@@ -13,11 +13,11 @@ namespace HumaneSociety
             //PointOfEntry.Run();
 
             Animal test = new Animal();
-            //test.AnimalId = 2;
-            //test.Name = "Bud";
-            //Query.AddAnimal(test);
-            Query.GetAnimalByID(3);
-            
+            test.AnimalId = 3;
+            test.Name = "Bud";
+            Query.RemoveAnimal(test);
+            //Query.UpdateAnimal(2, UserInterface.GetAnimalSearchCriteria());
+
 
         }
     }
