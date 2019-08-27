@@ -12,11 +12,12 @@ namespace HumaneSociety
         {
             //PointOfEntry.Run();
 
-            Animal test = new Animal();
+            //Animal test = new Animal();
+            Category test = new Category();
             //test.AnimalId = 2;
             //test.Name = "Bud";
             //Query.AddAnimal(test);
-            Query.GetAnimalByID(3);
+            Query.GetCategoryId("3");
             
 
         }

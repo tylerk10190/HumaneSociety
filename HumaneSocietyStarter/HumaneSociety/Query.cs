@@ -195,10 +195,9 @@ namespace HumaneSociety
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {   
-            //CRUD = Update, because it says UPDATE
-            //UPDATE Animal_DB SET animal_name = adopted/free WHERE "something etc. etc"
-            throw new NotImplementedException();
+        {
+
+           // db.Animals.Where;
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -220,9 +219,11 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            //CRUD = SELECT Finding by Category ID
-            //SELECT ID FROM category
-            throw new NotImplementedException();
+            Category category = new Category();
+            category = db.Category.Where(i => i.Name == categoryName).FirstOrDefault();
+            Console.WriteLine(category.Name);
+            Console.ReadLine();            
+            return category.CategoryId;
         }
         
         internal static Room GetRoom(int animalId)
