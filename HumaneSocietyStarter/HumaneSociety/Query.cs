@@ -186,9 +186,12 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            //Crud = Select, because we are trying to FIND by using ID attributes
-            //SELECT ID FROM ANIMAL DATABASE WHERE animal namde = ID
-            throw new NotImplementedException();
+            Animal animal = new Animal();
+            animal = db.Animals.Where(i => i.AnimalId == id).FirstOrDefault();
+            Console.WriteLine(animal.Name);
+            Console.ReadLine();
+            //UserInterface.DisplayAnimalInfo(animal);
+            return animal;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -200,8 +203,6 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
-            //CRUD = Delete, because Remove means to delete
-            //DELETE FROM Animal_DB WHERE animal name = "Propmt'
             Animal existingAnimal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).FirstOrDefault();
             db.Animals.DeleteOnSubmit(existingAnimal);
             db.SubmitChanges();
