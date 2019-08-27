@@ -167,8 +167,13 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
+            //THIS needs to Use UserEmplyee.Class
+            //Queary queary = new Query
+            //    queary.UserEmployee
+
             //CRUD = Select, because user can get info 
             // SELECT , employee name, id, etc......
+            //FROM Humane_Society_DB*???
             throw new NotImplementedException();
         }
 
