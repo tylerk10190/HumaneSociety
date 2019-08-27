@@ -196,9 +196,59 @@ namespace HumaneSociety
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
+            Animal animal = db.Animals.Where(a => a.AnimalId == animalId).FirstOrDefault();
+            GetAnimalUpdates(updates, animal);
             db.SubmitChanges();
-            //UserInterface.GetAnimalSearchCriteria();
+        }
 
+        internal static void GetAnimalUpdates(Dictionary<int, string> updates, Animal animal)
+        {
+            foreach (KeyValuePair<int, string> el in updates)
+            {
+                switch (el.Key)
+                {
+                    case 1:
+                        animal.CategoryId = int.Parse(el.Value);
+                        break;
+                    case 2:
+                        animal.Name = el.Value;
+                        break;
+                    case 3:
+                        animal.Age = int.Parse(el.Value);
+                        break;
+                    case 4:
+                        animal.Demeanor = el.Value;
+                        break;
+                    case 5:
+                        if(el.Value == "yes")
+                        {
+                            animal.KidFriendly = true;
+                        }
+                        else
+                        {
+                            animal.KidFriendly = false;
+                        }
+                        break;
+                    case 6:
+                        if (el.Value == "yes")
+                        {
+                            animal.PetFriendly = true;
+                        }
+                        else
+                        {
+                            animal.PetFriendly = false;
+                        }
+                        break;
+                    case 7:
+                        animal.Weight = int.Parse(el.Value);
+                        break;
+                    case 8:
+                        animal.AnimalId = int.Parse(el.Value);
+                        break;
+
+                }
+            }
+            
         }
 
         internal static void RemoveAnimal(Animal animal)
