@@ -180,10 +180,8 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            //CRUD = Insert, becasue Adding an animal to database
-            // INSERT INTO  Animal database (idk what the actual subject name to insert to)
-            //SELECT animal, or name FROM DATACLASS 
-            throw new NotImplementedException();
+            db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         internal static Animal GetAnimalByID(int id)
@@ -204,7 +202,9 @@ namespace HumaneSociety
         {
             //CRUD = Delete, because Remove means to delete
             //DELETE FROM Animal_DB WHERE animal name = "Propmt'
-            throw new NotImplementedException();
+            Animal existingAnimal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).FirstOrDefault();
+            db.Animals.DeleteOnSubmit(existingAnimal);
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
