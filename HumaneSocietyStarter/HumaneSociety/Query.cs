@@ -196,6 +196,7 @@ namespace HumaneSociety
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
+<<<<<<< HEAD
             Animal animal = db.Animals.Where(a => a.AnimalId == animalId).FirstOrDefault();
             GetAnimalUpdates(updates, animal);
             db.SubmitChanges();
@@ -249,6 +250,10 @@ namespace HumaneSociety
                 }
             }
             
+=======
+
+           // db.Animals.Where;
+>>>>>>> e32f504f8a85e2463361f7cb6634d4189ae1f1cb
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -270,15 +275,32 @@ namespace HumaneSociety
         //TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
+<<<<<<< HEAD
             Category category = db.Categories.Where(c => c.Name == categoryName).FirstOrDefault();
             int categoryID = category.CategoryId;
             return categoryID;
+=======
+            Category category = new Category();
+            category = db.Category.Where(i => i.Name == categoryName).FirstOrDefault();
+            Console.WriteLine(category.Name);
+            Console.ReadLine();            
+            return category.CategoryId;
+>>>>>>> e32f504f8a85e2463361f7cb6634d4189ae1f1cb
         }
 
         internal static Room GetRoom(int animalId)
         {
+<<<<<<< HEAD
 
             throw new NotImplementedException();
+=======
+            Room room = new Room();
+            room = db.Rooms.Where(r => r.AnimalId == animalId).FirstOrDefault();
+            Console.WriteLine(room.RoomNumber);
+            Console.ReadLine();
+            return room;
+            
+>>>>>>> e32f504f8a85e2463361f7cb6634d4189ae1f1cb
         }
         
         internal static int GetDietPlanId(string dietPlanName)
