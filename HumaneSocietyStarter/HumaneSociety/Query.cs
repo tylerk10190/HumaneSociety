@@ -168,6 +168,7 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
+
             switch(crudOperation)
             {
                 case "Create":
@@ -180,9 +181,10 @@ namespace HumaneSociety
 
 
             }
+
         }
 
-        // TODO: Animal CRUD Operations
+
         internal static void AddAnimal(Animal animal)
         {
             db.Animals.InsertOnSubmit(animal);
@@ -253,7 +255,7 @@ namespace HumaneSociety
 
                 }
             }
-            
+
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -264,8 +266,9 @@ namespace HumaneSociety
         }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates)
         {
+
             //if you find a match in the data base search return and new list with results display animals and ask to keep searching 
            
             IQueryable<Animal> animals = db.Animals;
@@ -303,6 +306,7 @@ namespace HumaneSociety
 
 
 
+
         }
 
         //TODO: Misc Animal Things
@@ -330,6 +334,8 @@ namespace HumaneSociety
         {
             DietPlan dp = db.DietPlans.Where(d => d.Name == dietPlanName).FirstOrDefault();
             int DpID = dp.DietPlanId;
+            Console.WriteLine(DpID);
+            Console.ReadLine();
             return DpID;
 
         }
@@ -337,10 +343,10 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            //does the client id equals animal id? does it need to?
-            //bool for aprrovalStatus 
-            //what do i need for adoptionFEe and paymentCollected
-            
+
+
+            throw new NotImplementedException();
+
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -352,37 +358,30 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            //adoption = db.Adoption.Where(a => a.AnimalId == animalId).FirstOrDefault();
-            //GetPendingAdoptions();
-            //db.SubmitChanges();
+
+
+            throw new NotImplementedException();
 
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            //CRUD = DELETE cause it says to remove from database?
-            //DELETE FROM Animal_DB
-            //WHERE Animal_Name = "PROMPT'
+
             throw new NotImplementedException();
         }
 
-        // TODO: Shots Stuff
+        
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            //CRUD = Select? find out status if shots needed
-            //Select animal name, shot status
-            //FROM animal_db
-            //WHERE animal name = 'propmt'
-            throw new NotImplementedException();
+            var shotsReceived = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId);
+            return shotsReceived;
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            //CRUD = UPDATE cause it says update
-            //UPDATE = Animal_Name
-            //SET Shot Status =Null or Recieved
-            //WHERE Animal_name = "PRopmt"
-            throw new NotImplementedException();
+            var shotGiven = db.Shots.Where(s => s.Name == shotName).FirstOrDefault();
+            var shotUpdate = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId).FirstOrDefault();
+            shotUpdate.ShotId = shotGiven.ShotId;
         }
     }
 }

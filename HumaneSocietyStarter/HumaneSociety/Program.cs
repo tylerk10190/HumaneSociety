@@ -10,14 +10,10 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            //PointOfEntry.Run();
+            PointOfEntry.Run();
 
             Query.SearchForAnimalsByMultipleTraits(UserInterface.GetAnimalSearchCriteria());
-            //Animal test = new Animal();
-            //test.AnimalId = 3;
-            //test.Name = "Bud";
-            //Query.RemoveAnimal(test);
-            //Query.UpdateAnimal(7, UserInterface.GetAnimalSearchCriteria());
+
 
 
 
