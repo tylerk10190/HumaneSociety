@@ -351,6 +351,8 @@ namespace HumaneSociety
             newAdoption.ClientId = adoptingClient.ClientId;
             newAdoption.ApprovalStatus = "Pending";
             newAdoption.PaymentCollected = false;
+            db.Adoptions.InsertOnSubmit(newAdoption);
+            db.SubmitChanges();
 
         }
 
@@ -379,6 +381,7 @@ namespace HumaneSociety
             {
                 var updatedAdoption = db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).FirstOrDefault();
                 updatedAdoption.ApprovalStatus = "Denied";
+                RemoveAdoption(adoption.AnimalId, adoption.ClientId);
             }
             db.SubmitChanges();
         }
@@ -386,7 +389,12 @@ namespace HumaneSociety
         internal static void RemoveAdoption(int animalId, int clientId)
         {
 
-            throw new NotImplementedException();
+
+            var adoptedAnimal = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();                      
+            
+                db.Adoptions.DeleteOnSubmit(adoptedAnimal);
+                db.SubmitChanges();
+            
         }
 
         
