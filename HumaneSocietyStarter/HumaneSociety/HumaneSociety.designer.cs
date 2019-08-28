@@ -692,9 +692,10 @@ namespace HumaneSociety
 		private EntityRef<DietPlan> _DietPlan;
 		
 		private EntityRef<Employee> _Employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
+        internal static object Properties;
+
+        #region Extensibility Method Definitions
+        partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnAnimalIdChanging(int value);
