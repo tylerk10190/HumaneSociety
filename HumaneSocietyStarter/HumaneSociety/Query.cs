@@ -49,7 +49,6 @@ namespace HumaneSociety
 
             Address addressFromDb = db.Addresses.Where(a => a.AddressLine1 == streetAddress && a.Zipcode == zipCode && a.USStateId == stateId).FirstOrDefault();
 
-            // if the address isn't found in the Db, create and insert it
             if (addressFromDb == null)
             {
                 Address newAddress = new Address();
@@ -64,7 +63,6 @@ namespace HumaneSociety
                 addressFromDb = newAddress;
             }
 
-            // attach AddressId to clientFromDb.AddressId
             newClient.AddressId = addressFromDb.AddressId;
 
             db.Clients.InsertOnSubmit(newClient);
@@ -74,7 +72,6 @@ namespace HumaneSociety
 
         internal static void UpdateClient(Client clientWithUpdates)
         {
-            // find corresponding Client from Db
             Client clientFromDb = null;
 
             try
@@ -88,20 +85,18 @@ namespace HumaneSociety
                 return;
             }
             
-            // update clientFromDb information with the values on clientWithUpdates (aside from address)
             clientFromDb.FirstName = clientWithUpdates.FirstName;
             clientFromDb.LastName = clientWithUpdates.LastName;
             clientFromDb.UserName = clientWithUpdates.UserName;
             clientFromDb.Password = clientWithUpdates.Password;
             clientFromDb.Email = clientWithUpdates.Email;
 
-            // get address object from clientWithUpdates
+
             Address clientAddress = clientWithUpdates.Address;
 
-            // look for existing Address in Db (null will be returned if the address isn't already in the Db
+ 
             Address updatedAddress = db.Addresses.Where(a => a.AddressLine1 == clientAddress.AddressLine1 && a.USStateId == clientAddress.USStateId && a.Zipcode == clientAddress.Zipcode).FirstOrDefault();
 
-            // if the address isn't found in the Db, create and insert it
             if(updatedAddress == null)
             {
                 Address newAddress = new Address();
@@ -116,10 +111,8 @@ namespace HumaneSociety
                 updatedAddress = newAddress;
             }
 
-            // attach AddressId to clientFromDb.AddressId
             clientFromDb.AddressId = updatedAddress.AddressId;
             
-            // submit changes
             db.SubmitChanges();
         }
         
@@ -167,7 +160,38 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            
+            switch (crudOperation)
+            {
+                case "create":
+                    db.Employees.InsertOnSubmit(employee);
+                    db.SubmitChanges();
+                    break;
+                case "delete":
+                    var foundEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                    db.Employees.DeleteOnSubmit(foundEmployee);
+                    db.SubmitChanges();
+                    break;
+                case "read":
+                    List<string> EmployeeInfo = new List<string>();
+                    foundEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                    EmployeeInfo.Add(foundEmployee.EmployeeId.ToString());
+                    EmployeeInfo.Add(foundEmployee.FirstName);
+                    EmployeeInfo.Add(foundEmployee.LastName);
+                    EmployeeInfo.Add(foundEmployee.UserName);
+                    EmployeeInfo.Add(foundEmployee.Password);
+                    EmployeeInfo.Add(foundEmployee.EmployeeNumber.ToString());
+                    EmployeeInfo.Add(foundEmployee.Email);
+                    UserInterface.DisplayUserOptions(EmployeeInfo);
+                    break;
+                case "update":
+                    foundEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                    foundEmployee.EmployeeId = employee.EmployeeId;
+                    foundEmployee.FirstName = employee.FirstName;
+                    foundEmployee.LastName = employee.LastName;
+                    foundEmployee.EmployeeNumber = employee.EmployeeNumber;
+                    foundEmployee.Email = employee.Email;
+                    break;
+            }
         }
 
 
@@ -262,7 +286,7 @@ namespace HumaneSociety
         internal static int GetCategoryId(string categoryName)
         {
 
-            Category category = db.Category.Where(c => c.Name == categoryName).FirstOrDefault();
+            Category category = db.Categories.Where(c => c.Name == categoryName).FirstOrDefault();
             int categoryID = category.CategoryId;
             return categoryID;
         }
@@ -290,15 +314,26 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-
-            throw new NotImplementedException();
+            var adoptingClient = db.Clients.Where(c => c.ClientId == client.ClientId).FirstOrDefault();
+            var adoptedAnimal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).FirstOrDefault();
+            Adoption newAdoption = new Adoption();
+            newAdoption.AnimalId = adoptedAnimal.AnimalId;
+            newAdoption.ClientId = adoptingClient.ClientId;
+            newAdoption.ApprovalStatus = "Pending";
+            newAdoption.PaymentCollected = false;
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            //TO DO figure out IQueryable use/create interface?
-            
-            throw new NotImplementedException();
+           
+            var pendingAdoptions = db.Adoptions.Where(a => a.ApprovalStatus == "Pending");
+            var pendingAdoptionsDictionary = pendingAdoptions.ToDictionary(a => a.AnimalId, a => a.ApprovalStatus);
+            foreach (var el in pendingAdoptionsDictionary)
+            {
+                var keyCatch = db.Animals.Where(a => a.AnimalId == el.Key).FirstOrDefault();
+                Console.WriteLine(keyCatch.Name);
+            }
+            return pendingAdoptions;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
@@ -317,6 +352,7 @@ namespace HumaneSociety
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
             var shotsReceived = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId);
+            Console.WriteLine(shotsReceived);
             return shotsReceived;
         }
 

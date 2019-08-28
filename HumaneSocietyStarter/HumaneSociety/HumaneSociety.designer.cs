@@ -127,7 +127,7 @@ namespace HumaneSociety
 			}
 		}
 		
-		public System.Data.Linq.Table<Category> Category
+		public System.Data.Linq.Table<Category> Categories
 		{
 			get
 			{
