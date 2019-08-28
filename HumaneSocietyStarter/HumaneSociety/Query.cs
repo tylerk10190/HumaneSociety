@@ -166,29 +166,28 @@ namespace HumaneSociety
                     db.SubmitChanges();
                     break;
                 case "delete":
-                    var foundEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                    var foundEmployee = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).FirstOrDefault();
                     db.Employees.DeleteOnSubmit(foundEmployee);
                     db.SubmitChanges();
                     break;
                 case "read":
                     List<string> EmployeeInfo = new List<string>();
-                    foundEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
-                    EmployeeInfo.Add(foundEmployee.EmployeeId.ToString());
-                    EmployeeInfo.Add(foundEmployee.FirstName);
-                    EmployeeInfo.Add(foundEmployee.LastName);
-                    EmployeeInfo.Add(foundEmployee.UserName);
-                    EmployeeInfo.Add(foundEmployee.Password);
-                    EmployeeInfo.Add(foundEmployee.EmployeeNumber.ToString());
-                    EmployeeInfo.Add(foundEmployee.Email);
+                    var employeeToDisplay = db.Employees.FirstOrDefault(e => e.EmployeeNumber == employee.EmployeeNumber);
+                    EmployeeInfo.Add(employeeToDisplay.EmployeeId.ToString());
+                    EmployeeInfo.Add(employeeToDisplay.FirstName);
+                    EmployeeInfo.Add(employeeToDisplay.LastName);
+                    EmployeeInfo.Add(employeeToDisplay.UserName);
+                    EmployeeInfo.Add(employeeToDisplay.Password);
+                    EmployeeInfo.Add(employeeToDisplay.EmployeeNumber.ToString());
+                    EmployeeInfo.Add(employeeToDisplay.Email);
                     UserInterface.DisplayUserOptions(EmployeeInfo);
                     break;
                 case "update":
-                    foundEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
-                    foundEmployee.EmployeeId = employee.EmployeeId;
-                    foundEmployee.FirstName = employee.FirstName;
-                    foundEmployee.LastName = employee.LastName;
-                    foundEmployee.EmployeeNumber = employee.EmployeeNumber;
-                    foundEmployee.Email = employee.Email;
+                    var employeeToUpdate = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).FirstOrDefault();
+                    employeeToUpdate.FirstName = employee.FirstName;
+                    employeeToUpdate.LastName = employee.LastName;
+                    employeeToUpdate.Email = employee.Email;
+                    db.SubmitChanges();
                     break;
             }
 
@@ -345,6 +344,8 @@ namespace HumaneSociety
             newAdoption.ClientId = adoptingClient.ClientId;
             newAdoption.ApprovalStatus = "Pending";
             newAdoption.PaymentCollected = false;
+            db.Adoptions.InsertOnSubmit(newAdoption);
+            db.SubmitChanges();
 
         }
 
@@ -366,21 +367,23 @@ namespace HumaneSociety
 
             if(isAdopted == true)
             {
-                var updatedAdoption = db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).FirstOrDefault();
-                    updatedAdoption.ApprovalStatus = "Approved";
+              adoption.ApprovalStatus = "Approved";
             }
             else
             {
-                var updatedAdoption = db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).FirstOrDefault();
-                updatedAdoption.ApprovalStatus = "Denied";
+                adoption.ApprovalStatus = "Denied";
+                RemoveAdoption(adoption.AnimalId, adoption.ClientId);
             }
             db.SubmitChanges();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
+            var adoptedAnimal = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();
 
-            throw new NotImplementedException();
+            db.Adoptions.DeleteOnSubmit(adoptedAnimal);
+            db.SubmitChanges();
+
         }
 
         

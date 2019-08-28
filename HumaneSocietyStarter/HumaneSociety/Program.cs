@@ -10,8 +10,8 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            //PointOfEntry.Run();
-            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            PointOfEntry.Run();
+            //HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
             //Query.SearchForAnimalsByMultipleTraits(UserInterface.GetAnimalSearchCriteria());
 
@@ -24,10 +24,10 @@ namespace HumaneSociety
 
             //Query.UpdateShot("Rabies", newAnimal);
 
+
             //Query.GetDietPlanId("dog")
 
-            Query.Adopt()
-
+            //Query.Adopt()
 
 
             Console.ReadLine();
