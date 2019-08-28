@@ -26,78 +26,11 @@ namespace HumaneSociety.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=HumaneSociety;Integrated Security=True;Encrypt=Fals" +
-            "e;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-Q2O8LPL\\SQLEXPRESS;Initial Catalog=HumanSociety;Integrated Se" +
+            "curity=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
         public string HumaneSocietyConnectionString {
             get {
                 return ((string)(this["HumaneSocietyConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=HumaneSociety;Integrated Secur" +
-            "ity=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True")]
-        public string HumaneSocietyConnectionString1 {
-            get {
-                return ((string)(this["HumaneSocietyConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=aspnet-SuperHeroRegistry-20180" +
-            "610103656;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerC" +
-            "ertificate=False")]
-        public string aspnet_SuperHeroRegistry_20180610103656ConnectionString {
-            get {
-                return ((string)(this["aspnet_SuperHeroRegistry_20180610103656ConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MSI;Initial Catalog=HumaneSociety;Integrated Security=True;Connect Ti" +
-            "meout=30;Encrypt=False;TrustServerCertificate=False")]
-        public string HumaneSocietyConnectionString2 {
-            get {
-                return ((string)(this["HumaneSocietyConnectionString2"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-Q2O8LPL\\SQLEXPRESS;Initial Catalog=HumanSociety;Integrated Se" +
-            "curity=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
-        public string HumanSocietyConnectionString {
-            get {
-                return ((string)(this["HumanSocietyConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-Q2O8LPL\\SQLEXPRESS;Initial Catalog=HumaneSociety;Integrated S" +
-            "ecurity=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
-        public string HumaneSocietyConnectionString3 {
-            get {
-                return ((string)(this["HumaneSocietyConnectionString3"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TYLERKOEPKE9218\\SQLEXPRESS;Initial Catalog=HumaneSociety;Integrated S" +
-            "ecurity=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
-        public string HumaneSocietyConnectionString4 {
-            get {
-                return ((string)(this["HumaneSocietyConnectionString4"]));
             }
         }
     }

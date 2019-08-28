@@ -25,12 +25,16 @@ namespace HumaneSociety
             //Query.UpdateShot("Rabies", newAnimal);
 
 
+<<<<<<< HEAD
             //Query.GetDietPlanId("dog")
+=======
+            //Query.Adopt()
+>>>>>>> af5d44e2a475bcf10b1e8931c5b04697b401340a
 
             //Query.Adopt()
 
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
         }
     }
