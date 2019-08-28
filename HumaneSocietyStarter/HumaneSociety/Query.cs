@@ -156,9 +156,7 @@ namespace HumaneSociety
         }
 
 
-        //// TODO Items: ////
-        
-        // TODO: Allow any of the CRUD operations to occur here
+
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
             switch (crudOperation)
@@ -207,8 +205,6 @@ namespace HumaneSociety
         {
             Animal animal = new Animal();
             animal = db.Animals.Where(i => i.AnimalId == id).FirstOrDefault();
-            Console.WriteLine(animal.Name);
-            Console.ReadLine();
             return animal;
         }
 
@@ -310,7 +306,6 @@ namespace HumaneSociety
                         break;
                 }
             }
-            // Console.WriteLine(animals);
             Console.ReadLine();
             return animals;
         }
@@ -336,7 +331,6 @@ namespace HumaneSociety
         {
             DietPlan dp = db.DietPlans.Where(d => d.Name == dietPlanName).FirstOrDefault();
             int DpID = dp.DietPlanId;
-            Console.WriteLine(DpID);
             return DpID;
 
         }
@@ -393,29 +387,18 @@ namespace HumaneSociety
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
             var shotsReceived = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId);
-            Console.WriteLine(shotsReceived);
             return shotsReceived;
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            DateTime now = DateTime.Now;
-            var shotGiven = db.Shots.Where(s => s.Name == shotName).FirstOrDefault();
-            var shotUpdate = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId).FirstOrDefault();
-            var dateUpdate = db.AnimalShots.Where(d => d.DateReceived == now);
-
-            if(shotUpdate == null)
+            var shotId = db.Shots.Where(a => a.Name == shotName).Select(s => s.ShotId).Single();
+            AnimalShot animalShot = new AnimalShot()
             {
-                var newShot = db.AnimalShots.Where(s => s.ShotId == shotGiven.ShotId).FirstOrDefault();
-                newShot.DateReceived = now;
-                db.AnimalShots.InsertOnSubmit(newShot);
-            }
-            else
-            {
-                shotUpdate.ShotId = shotGiven.ShotId;
-                shotUpdate.DateReceived = now;
-            }
-
+                AnimalId = animal.AnimalId,
+                ShotId = shotId
+            };
+            db.AnimalShots.InsertOnSubmit(animalShot);
             db.SubmitChanges();
         }
     }
