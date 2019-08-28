@@ -167,17 +167,10 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            //THIS needs to Use UserEmplyee.Class
-            //Queary queary = new Query
-            //    queary.UserEmployee
-
-            //CRUD = Select, because user can get info 
-            // SELECT , employee name, id, etc......
-            //FROM Humane_Society_DB*???
-            throw new NotImplementedException();
+            
         }
 
-        // TODO: Animal CRUD Operations
+
         internal static void AddAnimal(Animal animal)
         {
             db.Animals.InsertOnSubmit(animal);
@@ -196,7 +189,7 @@ namespace HumaneSociety
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
-<<<<<<< HEAD
+
             Animal animal = db.Animals.Where(a => a.AnimalId == animalId).FirstOrDefault();
             GetAnimalUpdates(updates, animal);
             db.SubmitChanges();
@@ -249,11 +242,6 @@ namespace HumaneSociety
 
                 }
             }
-            
-=======
-
-           // db.Animals.Where;
->>>>>>> e32f504f8a85e2463361f7cb6634d4189ae1f1cb
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -264,49 +252,37 @@ namespace HumaneSociety
         }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates)
         {
-            //CRUD = Select because FIND by MULTIPLE ATTRIBUTES
-            //SELECT name,color, diet,size etc etc
-            //FROM Animal_DB
+
             throw new NotImplementedException();
         }
 
         //TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-<<<<<<< HEAD
-            Category category = db.Categories.Where(c => c.Name == categoryName).FirstOrDefault();
+
+            Category category = db.Category.Where(c => c.Name == categoryName).FirstOrDefault();
             int categoryID = category.CategoryId;
             return categoryID;
-=======
-            Category category = new Category();
-            category = db.Category.Where(i => i.Name == categoryName).FirstOrDefault();
-            Console.WriteLine(category.Name);
-            Console.ReadLine();            
-            return category.CategoryId;
->>>>>>> e32f504f8a85e2463361f7cb6634d4189ae1f1cb
         }
 
         internal static Room GetRoom(int animalId)
         {
-<<<<<<< HEAD
-
-            throw new NotImplementedException();
-=======
             Room room = new Room();
             room = db.Rooms.Where(r => r.AnimalId == animalId).FirstOrDefault();
             Console.WriteLine(room.RoomNumber);
             Console.ReadLine();
             return room;
             
->>>>>>> e32f504f8a85e2463361f7cb6634d4189ae1f1cb
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
             DietPlan dp = db.DietPlans.Where(d => d.Name == dietPlanName).FirstOrDefault();
             int DpID = dp.DietPlanId;
+            Console.WriteLine(DpID);
+            Console.ReadLine();
             return DpID;
 
         }
@@ -314,10 +290,7 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            //CRUD = UPDATE or INSERT because depending if we update dog status or adding info somewhere else?
-            //UPDATE Animal_Status
-            //SET Availablity = Adopted 
-            //WHERE pet_name = "Search_animal_prmpt"
+
             throw new NotImplementedException();
         }
 
@@ -330,38 +303,28 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            //CRUD = UPDATE cause it says update
-            //UPDATE ANIMAL
-            //SET Availablity = null
-            //WHERE Animal_NAme = "PROMPT"
+
             throw new NotImplementedException();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            //CRUD = DELETE cause it says to remove from database?
-            //DELETE FROM Animal_DB
-            //WHERE Animal_Name = "PROMPT'
+
             throw new NotImplementedException();
         }
 
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            //CRUD = Select? find out status if shots needed
-            //Select animal name, shot status
-            //FROM animal_db
-            //WHERE animal name = 'propmt'
-            throw new NotImplementedException();
+            var shotsReceived = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId);
+            return shotsReceived;
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            //CRUD = UPDATE cause it says update
-            //UPDATE = Animal_Name
-            //SET Shot Status =Null or Recieved
-            //WHERE Animal_name = "PRopmt"
-            throw new NotImplementedException();
+            var shotGiven = db.Shots.Where(s => s.Name == shotName).FirstOrDefault();
+            var shotUpdate = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId).FirstOrDefault();
+            shotUpdate.ShotId = shotGiven.ShotId;
         }
     }
 }
