@@ -66,7 +66,7 @@ namespace HumaneSociety
     #endregion
 		
 		public HumaneSocietyDataContext() : 
-				base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString4, mappingSource)
+				base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -692,10 +692,9 @@ namespace HumaneSociety
 		private EntityRef<DietPlan> _DietPlan;
 		
 		private EntityRef<Employee> _Employee;
-        internal static object Properties;
-
-        #region Extensibility Method Definitions
-        partial void OnLoaded();
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnAnimalIdChanging(int value);
