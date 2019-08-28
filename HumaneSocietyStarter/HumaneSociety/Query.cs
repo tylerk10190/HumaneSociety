@@ -161,7 +161,6 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-<<<<<<< HEAD
             switch (crudOperation)
             {
                 case "create":
@@ -194,22 +193,7 @@ namespace HumaneSociety
                     foundEmployee.Email = employee.Email;
                     break;
             }
-=======
 
-            switch(crudOperation)
-            {
-                case "Create":
-                    
-                    
-                    break;
-                
-
-
-
-
-            }
-
->>>>>>> d37548109a6fa26bd0d99516d2e5edd73d5b4b88
         }
 
 
@@ -243,7 +227,7 @@ namespace HumaneSociety
                 switch (el.Key)
                 {
                     case 1:
-                        animal.CategoryId = int.Parse(el.Value);
+                        animal.CategoryId = GetCategoryId((el.Value));
                         break;
                     case 2:
                         animal.Name = el.Value;
@@ -297,15 +281,14 @@ namespace HumaneSociety
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates)
         {
 
-            //if you find a match in the data base search return and new list with results display animals and ask to keep searching 
-           
+            
             IQueryable<Animal> animals = db.Animals;
             foreach (KeyValuePair<int, string> update in updates)
             {
                 switch (update.Key)
                 {
                     case 1:
-                        animals = animals.Where(a => a.CategoryId == int.Parse(update.Value));
+                        animals = animals.Where(a => a.CategoryId == GetCategoryId(update.Value));
                         break;
                     case 2:
                         animals = animals.Where(a=> a.Name == update.Value);
@@ -327,14 +310,9 @@ namespace HumaneSociety
                         break;
                 }
             }
-            Console.WriteLine(animals);
+            // Console.WriteLine(animals);
             Console.ReadLine();
             return animals;
-
-
-
-
-
         }
 
         //TODO: Misc Animal Things
@@ -349,13 +327,9 @@ namespace HumaneSociety
 
         internal static Room GetRoom(int animalId)
         {
-
             Room room = new Room();
             room = db.Rooms.Where(r => r.AnimalId == animalId).FirstOrDefault();
-            Console.WriteLine(room.RoomNumber);
-            Console.ReadLine();
             return room;
-            
         }
         
         internal static int GetDietPlanId(string dietPlanName)
@@ -363,7 +337,6 @@ namespace HumaneSociety
             DietPlan dp = db.DietPlans.Where(d => d.Name == dietPlanName).FirstOrDefault();
             int DpID = dp.DietPlanId;
             Console.WriteLine(DpID);
-            Console.ReadLine();
             return DpID;
 
         }
@@ -371,7 +344,6 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-<<<<<<< HEAD
             var adoptingClient = db.Clients.Where(c => c.ClientId == client.ClientId).FirstOrDefault();
             var adoptedAnimal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).FirstOrDefault();
             Adoption newAdoption = new Adoption();
@@ -379,12 +351,7 @@ namespace HumaneSociety
             newAdoption.ClientId = adoptingClient.ClientId;
             newAdoption.ApprovalStatus = "Pending";
             newAdoption.PaymentCollected = false;
-=======
 
-
-            throw new NotImplementedException();
-
->>>>>>> d37548109a6fa26bd0d99516d2e5edd73d5b4b88
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -402,8 +369,8 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-<<<<<<< HEAD
-            if(isAdopted = true)
+
+            if(isAdopted == true)
             {
                 var updatedAdoption = db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).FirstOrDefault();
                     updatedAdoption.ApprovalStatus = "Approved";
@@ -413,13 +380,7 @@ namespace HumaneSociety
                 var updatedAdoption = db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).FirstOrDefault();
                 updatedAdoption.ApprovalStatus = "Denied";
             }
-            
-=======
-
-
-            throw new NotImplementedException();
-
->>>>>>> d37548109a6fa26bd0d99516d2e5edd73d5b4b88
+            db.SubmitChanges();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
@@ -438,9 +399,24 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
+            DateTime now = DateTime.Now;
             var shotGiven = db.Shots.Where(s => s.Name == shotName).FirstOrDefault();
             var shotUpdate = db.AnimalShots.Where(s => s.AnimalId == animal.AnimalId).FirstOrDefault();
-            shotUpdate.ShotId = shotGiven.ShotId;
+            var dateUpdate = db.AnimalShots.Where(d => d.DateReceived == now);
+
+            if(shotUpdate == null)
+            {
+                var newShot = db.AnimalShots.Where(s => s.ShotId == shotGiven.ShotId).FirstOrDefault();
+                newShot.DateReceived = now;
+                db.AnimalShots.InsertOnSubmit(newShot);
+            }
+            else
+            {
+                shotUpdate.ShotId = shotGiven.ShotId;
+                shotUpdate.DateReceived = now;
+            }
+
+            db.SubmitChanges();
         }
     }
 }
