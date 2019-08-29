@@ -371,12 +371,8 @@ namespace HumaneSociety
             }
             else
             {
-<<<<<<< HEAD
+
                 adoption.ApprovalStatus = "Denied";
-=======
-                var updatedAdoption = db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).FirstOrDefault();
-                updatedAdoption.ApprovalStatus = "Denied";
->>>>>>> af5d44e2a475bcf10b1e8931c5b04697b401340a
                 RemoveAdoption(adoption.AnimalId, adoption.ClientId);
             }
             db.SubmitChanges();
@@ -389,15 +385,6 @@ namespace HumaneSociety
             db.Adoptions.DeleteOnSubmit(adoptedAnimal);
             db.SubmitChanges();
 
-<<<<<<< HEAD
-=======
-
-            var adoptedAnimal = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();                      
-            
-                db.Adoptions.DeleteOnSubmit(adoptedAnimal);
-                db.SubmitChanges();
-            
->>>>>>> af5d44e2a475bcf10b1e8931c5b04697b401340a
         }
 
         
@@ -409,11 +396,13 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
+            DateTime now = DateTime.Now;
             var shotId = db.Shots.Where(a => a.Name == shotName).Select(s => s.ShotId).Single();
             AnimalShot animalShot = new AnimalShot()
             {
                 AnimalId = animal.AnimalId,
-                ShotId = shotId
+                ShotId = shotId,
+                DateReceived = now
             };
             db.AnimalShots.InsertOnSubmit(animalShot);
             db.SubmitChanges();
